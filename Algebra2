@@ -1,0 +1,22 @@
+Monte consultas utilizando álgebra relacional que respondam às demandas abaixo:
+
+Qual o nome e preço dos livros que custam até 19 reais?
+Quais livros da “Colleen Houck” venderam mais de 3 exemplares em um único pedido?
+Quais são os livros que tiveram vendas acima de 10 unidades em um único pedido?
+Qual o nome dos livros mais recomendados com nota média superior a 4.3?
+
+
+----------------------------------------------------------------
+
+Ex 1 - π nome_livro, preco (σ preco <= 19 (Livros))
+
+Ex 2 - π nome_livro (
+    σ qtd_vendida > 3 (
+        (σ autor = 'Colleen Houck' (Livros)) ⨝ Vendas
+    )
+)
+
+ex 3 - π nome_livro (σ qtd_vendida > 3 ( Livros ⟕ Vendas ))
+
+Ex 4 - π nome_livro (σ LivrosRecomendados.nota_media > 4.3 ( Livros ⨝ LivrosRecomendados))
+
