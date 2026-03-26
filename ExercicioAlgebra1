@@ -1,0 +1,54 @@
+Para consolidar os conteúdos, abaixo temos uma série de demandas solicitadas que podem ser visualizadas através da álgebra relacional, o desafio é montar uma consulta utilizando seleção e projeção para obter informações específicas sobre os livros, vendedores, clientes e vendas.
+
+Quais são os nomes dos livros que possuem preço maior que R$50?
+Quais são os vendedores que possuem mais de 5 anos de experiência?
+Quais são os códigos de livros recomendados pela revista ‘BestBooks Magazine’?
+Quais são os livros com estoque menor que 20 unidades?
+Quais são os códigos dos livros mais vendidos durante o ano de 2021?
+Quais são os livros com preço entre R$30 e R$50?
+Existe algum livros sem exemplar em estoque? Quais?
+Quais são os livros que custam mais de R$ 50 e contém mais de 5 unidades no estoque?
+Quais livros atendem os requisitos do amigo oculto do cliente André: ser um livro de George Orwell ou de qualquer outra autoria que seja mais caro que 30 reais?
+
+
+
+------------------------------------------------------------------
+
+Ex 1
+
+π nome_livro (σ preco > 50 (Livros))
+
+Ex 2
+
+π nome (σ anos_exp > 5 (Vendedores))
+
+Ex 3
+
+π id_livro (LivrosRecomendados)
+
+Ex 4
+
+σ qtd_estoque < 20 (Livros)
+
+Ex 5
+
+π id_livro (σ ano = 2021 (LivroMaisVendidos))
+
+Ex 6
+
+π nome_livro (σ preco > 30 ∧ preco < 50 (Livros))
+
+Ex 7
+
+π nome_livro (σ qtd_estoque < 1 (Livros))
+
+Ex 8
+
+π nome_livro (σ preco > 50 ∧ qtd_estoque > 5 (Livros))
+
+Ex 9
+
+π nome_livro (σ preco > 30 ∨ autor = 'George Orwell' (Livros))
+
+
+
