@@ -1,0 +1,68 @@
+-- 1
+π fname, lname (σ gender = 'F' (Actor));
+
+-- 2
+π name (σ year > 1999 (Movie));
+
+-- 3
+π Movie.name, Director.fname, Director.lname (
+    Movie ⨝ Movie.id = Directs.mid
+    Directs ⨝ Directs.did = Director.id
+);
+
+-- 4
+π Movie.name, Actor.fname, Actor.lname, Acts.role (
+    σ rank > 6 (Movie)
+    ⨝ Movie.id = Acts.mid
+    Acts ⨝ Acts.aid = Actor.id
+);
+
+-- 5
+γ Director.id, Director.fname, Director.lname, COUNT(mid)→num_filmes (
+    Director ⨝ Director.id = Directs.did Directs
+);
+
+-- 6
+γ genre, COUNT(mid)→num_filmes (Genre);
+
+-- 7
+γ genre, AVG(rank)→media, MIN(rank)→min, MAX(rank)→max (
+    Genre ⨝ Genre.mid = Movie.id Movie
+);
+
+-- 8
+π fname, lname (Actor ⨝ Actor.id = Director.id Director);
+
+-- 9
+π fname, lname (Actor)
+−
+π fname, lname (Actor ⨝ Actor.id = Director.id Director);
+
+-- 10
+π fname, lname (Actor)
+∪
+π fname, lname (Director);
+
+-- 11
+π name (Movie)
+−
+π name (
+    Movie ⨝ Movie.id = Directs.mid Directs
+);
+
+-- 12
+π fname, lname (
+    Actor ⨝ Actor.id = aid
+    σ num_filmes < 2 (
+        γ aid, COUNT(mid)→num_filmes (Acts)
+    )
+);
+
+-- 13
+γ genre, year, COUNT(mid)→media_filmes (
+    (σ num_atores < 2 (
+        γ mid, COUNT(aid)→num_atores (Acts)
+    ))
+    ⨝ mid = Movie.id Movie
+    ⨝ mid = Genre.mid Genre
+);
